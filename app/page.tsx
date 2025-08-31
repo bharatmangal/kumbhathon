@@ -82,7 +82,7 @@ export default function HomePage() {
 
       <footer className="mt-12 border-t">
         <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-600">
-          Color system: Primary saffron (orange-600), accent blue-600, neutrals slate/white. Fonts: Geist Sans/Mono.
+          Copyright © 2025 SimhasthaOne. All rights reserved.
         </div>
       </footer>
     </main>
