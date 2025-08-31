@@ -5,17 +5,19 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://simhastha-one.vercel.app'),
   title: 'SimhasthaOne App',
   description: 'One App for Simhastha 2028',
   generator: 'bharatmangal',
   icons: {
-    icon: '/placeholder-logo.png',
-    apple: '/placeholder-logo.png',
+    icon: '/om-symbol.svg',
+    shortcut: '/om-symbol.svg',
+    apple: '/om-symbol.svg',
   },
   openGraph: {
     title: 'SimhasthaOne App',
     description: 'One App for Simhastha 2028',
-    url: 'https://simhastha-one.vercel.app', // Replace with your actual domain
+    url: 'https://simhastha-one.vercel.app',
     siteName: 'SimhasthaOne',
     images: [
       {
@@ -44,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/placeholder-logo.png" type="image/png" />
+        <link rel="icon" href="/om-symbol.svg" type="image/svg+xml" />
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         {children}
