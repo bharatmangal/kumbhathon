@@ -12,6 +12,7 @@ function generateCode() {
 export default function GroupPage() {
   const [group, setGroup] = useState<string>("")
   const [notice, setNotice] = useState<string>("")
+  const [last, setLast] = useState<any>(null)
 
   useEffect(() => {
     const g = new URLSearchParams(window.location.search).get("group")
@@ -19,12 +20,19 @@ export default function GroupPage() {
     const code = g || saved || ""
     setGroup(code)
     if (!saved && code) localStorage.setItem("simhastha_group", code)
+
+    // Load last check-in
+    if (code) {
+      const k = localStorage.getItem(`simhastha_checkin_${code}`)
+      if (k) setLast(JSON.parse(k))
+    }
   }, [])
 
   function createGroup() {
     const code = generateCode()
     setGroup(code)
     localStorage.setItem("simhastha_group", code)
+    setLast(null) // reset last check-in
   }
 
   function share() {
@@ -46,14 +54,12 @@ export default function GroupPage() {
       lat = pos.coords.latitude
       lon = pos.coords.longitude
     } catch {}
-    localStorage.setItem(`simhastha_checkin_${group}`, JSON.stringify({ lat, lon, at: new Date().toISOString() }))
+
+    const entry = { lat, lon, at: new Date().toISOString() }
+    localStorage.setItem(`simhastha_checkin_${group}`, JSON.stringify(entry))
+    setLast(entry)
     setNotice("Checked in. Group members can view your last location.")
   }
-
-  const last = (() => {
-    const k = localStorage.getItem(`simhastha_checkin_${group}`)
-    return k ? JSON.parse(k) : null
-  })()
 
   return (
     <main className="min-h-screen bg-white">
